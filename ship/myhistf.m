@@ -16,11 +16,13 @@ end
 [~,locMp]=max(k);%找到最大值与位置
 Mp=h(locMp);
 for i=1:b-1%反向计算斜率
-   k0(i)=-(h(i)-h(b))/(i-b); 
+   k0(i)=-(h(i)-h(b))/(i-b);
 end
 [~,locNp]=max(k0);%找到最大值与位置
 Np=h(locNp);
 kl=(Np-Mp)/(locNp-locMp);%L斜率
+locNp
+locMp
 
 for i=locMp:locNp
     L=Mp+kl*(i-locMp);
@@ -31,6 +33,7 @@ for i=locMp:locNp
    end
 end
 
+
 const1=log( (pos/khist+1))/pos;%计算指数系数
 const2=9/(255-pos);
 const3=1-pos*const2;
@@ -39,7 +42,7 @@ for i=1:m
     for j=1:n
         if J0(i,j)<=pos
             J0(i,j)=floor(exp((J0(i,j)*const1))-1);
-        else 
+        else                                                                
            J0(i,j)=pos/khist+(255-pos/khist)*log10((const2*J0(i,j)+const3));
         end
     end

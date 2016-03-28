@@ -1,6 +1,7 @@
 %%均值目标检测
 clc ;close all;clear;
-I=imread('lowd.png');%读取图片
+%I=imread('lowd.png');%读取图片
+I=imread('4.bmp');
 tempmax=0;%找最大值临时变量
 pos=0;%此时灰度位置
 hth=500;%连通区域高阈值
@@ -12,11 +13,12 @@ figure(1)
 subplot(411)
 imshow(J)
 title('原始图像')
-
 J=myhistf( J,1.5,600 );
-line=myline(J);
+line=myline(J)
+
 subplot(412)
 imshow(J)
+J=bgreduction(J,0.6);
 J(1:uint8(line-floor(m/10)),:)=0;
 A=fspecial('average',8);%均值滤波
 J=filter2(A,J,'same');
@@ -57,10 +59,10 @@ subplot(414)
 % IM2 = imclearborder(BW2,8) ;
 % imshow(IM2,[])
 se = strel('line',10,2);
-se1 = strel('square',4);
+se1 = strel('square',3);%创建
  BW2= imerode(J,se1);
  %BW2= imerode(BW2,se1);
- BW2 = bwmorph(BW2,'hbreak');
+%  BW2 = bwmorph(BW2,'hbreak');
  %BW2 = bwmorph(BW2,'erode',1);
 
 % BW2 = bwmorph(J,'thin',5);
